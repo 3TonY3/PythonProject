@@ -10,11 +10,12 @@ class Bullet:
         self.speed_y = 0
         self.dest_x = 0
         self.dest_y = 0
+        self.img_counter = 0
 
     def move(self):
         self.x += self.speed_x
         if self.x <= display_width:
-            display.blit(bullet_img, (self.x, self.y))
+            display.blit(bullet_img6, (self.x, self.y))
             return True
         else:
             return False
@@ -42,10 +43,14 @@ class Bullet:
             self.y -= self.speed_y
 
         if self.x <= display_width and not reverse:
-            display.blit(bullet_img, (self.x, self.y))
+            if self.img_counter == 25:
+                self.img_counter = 0
+
+            display.blit(bullet_img6[self.img_counter // 5], (self.x, self.y))
+            self.img_counter += 1
             return True
         elif self.x >= 0 and reverse:
-            display.blit(bullet_img, (self.x, self.y))
+            display.blit(bullet_img6, (self.x, self.y))
             return True
         else:
             return False
