@@ -11,10 +11,10 @@ class Game:
     def __init__(self):
         pygame.display.set_caption('Dinozaur')  # громкость звука 1 - 100%
 
-        icon = pygame.image.load('Backgrounds/icon.png')
+        icon = pygame.image.load('resources/Backgrounds/icon.png')
         pygame.display.set_icon(icon)
 
-        pygame.mixer.music.load('Sounds/background.mp3')
+        pygame.mixer.music.load('resources/Sounds/background.mp3')
         pygame.mixer.music.set_volume(0.5)
 
         self.cactus_option = [69, 449, 37, 410, 40, 420]
@@ -213,7 +213,7 @@ class Game:
         return self.game_over()
 
     def show_menu(self):
-        pygame.mixer.music.load('Sounds/Big_Slinker.mp3')
+        pygame.mixer.music.load('resources/Sounds/Big_Slinker.mp3')
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
