@@ -53,6 +53,23 @@ light_img = [pygame.image.load('Effects/Light0.png'), pygame.image.load('Effects
         'Effects/Light9.png'),
              pygame.image.load('Effects/Light10.png')]
 
+bullet_img7 = pygame.image.load('Effects/Blood-Magic-Effect_16.png')
+bullet_img7 = pygame.transform.scale(bullet_img7, (50, 50))
+
+bullet_img8 = pygame.image.load('Effects/Blood-Magic-Effect_17.png')
+bullet_img8 = pygame.transform.scale(bullet_img8, (50, 50))
+
+bullet_img9 = pygame.image.load('Effects/Blood-Magic-Effect_18.png')
+bullet_img9 = pygame.transform.scale(bullet_img9, (50, 50))
+
+bullet_img10 = pygame.image.load('Effects/Blood-Magic-Effect_19.png')
+bullet_img10 = pygame.transform.scale(bullet_img10, (50, 50))
+
+bullet_img11 = pygame.image.load('Effects/Blood-Magic-Effect_20.png')
+bullet_img11 = pygame.transform.scale(bullet_img11, (50, 50))
+
+bullet_img12 = [bullet_img7, bullet_img8, bullet_img9, bullet_img10, bullet_img11]
+
 
 def set_theme(num):
     global land

@@ -21,13 +21,13 @@ bullet_sound = pygame.mixer.Sound('Sounds/shot.wav')
 icon = pygame.image.load('Backgrounds/icon.png')
 pygame.display.set_icon(icon)
 
-cactus_img = [pygame.image.load('resources/Objects/Cactus0.png'), pygame.image.load('resources/Objects/Cactus1.png'), pygame.image.load(
-    'resources/Objects/Cactus2.png')]
+cactus_img = [pygame.image.load('Objects/Cactus0.png'), pygame.image.load('Objects/Cactus1.png'), pygame.image.load(
+    'Objects/Cactus2.png')]
 cactus_option = [69, 449, 37, 410, 40, 420]
 
 
-stone_img = [pygame.image.load('resources/Objects/Stone0.png'), pygame.image.load('resources/Objects/Stone1.png')]
-cloud_img = [pygame.image.load('resources/Objects/Cloud0.png'), pygame.image.load('resources/Objects/Cloud1.png')]
+stone_img = [pygame.image.load('Objects/Stone0.png'), pygame.image.load('Objects/Stone1.png')]
+cloud_img = [pygame.image.load('Objects/Cloud0.png'), pygame.image.load('Objects/Cloud1.png')]
 
 dino_img = [pygame.image.load('Dino/Dino0.png'), pygame.image.load('Dino/Dino1.png'),
             pygame.image.load('Dino/Dino2.png'), pygame.image.load('Dino/Dino3.png'), pygame.image.load(
@@ -37,10 +37,10 @@ bird_img = [pygame.image.load('Bird/Bird0.png'), pygame.image.load('Bird/Bird1.p
             pygame.image.load('Bird/Bird2.png'), pygame.image.load('Bird/Bird3.png'), pygame.image.load(
         'Bird/Bird4.png'), pygame.image.load('Bird/Bird5.png')]
 
-health_image = pygame.image.load('resources/Effects/heart.png')
+health_image = pygame.image.load('Effects/heart.png')
 health_image = pygame.transform.scale(health_image, (30, 30))
 
-bullet_img = pygame.image.load('resources/Effects/shot.png')
+bullet_img = pygame.image.load('Effects/shot.png')
 bullet_img = pygame.transform.scale(bullet_img, (30, 9))
 
 img_counter = 0

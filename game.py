@@ -3,7 +3,6 @@ from bird import *
 from object import *
 from effects import *
 import images as img
-from states import *
 from save import *
 
 
@@ -11,10 +10,10 @@ class Game:
     def __init__(self):
         pygame.display.set_caption('Dinozaur')  # громкость звука 1 - 100%
 
-        icon = pygame.image.load('resources/Backgrounds/icon.png')
+        icon = pygame.image.load('Backgrounds/icon.png')
         pygame.display.set_icon(icon)
 
-        pygame.mixer.music.load('resources/Sounds/background.mp3')
+        pygame.mixer.music.load('Sounds/background.mp3')
         pygame.mixer.music.set_volume(0.5)
 
         self.cactus_option = [69, 449, 37, 410, 40, 420]
@@ -39,10 +38,13 @@ class Game:
                 self.choose_hero()
                 self.start_game()
             elif self.game_state.check(State.CONTINUE):
-                self.max_scores = self.save_data.get('max')
-                set_theme(self.save_data.get('theme'))
-                set_hero(self.save_data.get('hero'))
-                self.start_game()
+                try:
+                    self.max_scores = self.save_data.get('max')
+                    set_theme(self.save_data.get('theme'))
+                    set_hero(self.save_data.get('hero'))
+                    self.start_game()
+                except Exception:
+                    print(2)
             elif self.game_state.check(State.LEVEL_2):
                 self.level2()
             elif self.game_state.check(State.QUIT):
@@ -125,13 +127,12 @@ class Game:
         self.create_cactus_arr_lvl2(cactus_arr)
 
         stone, cloud = self.open_random_objects()
-        heart = Object(display_width, 280, 30, 7, health_image)
+        heart = Object(display_width, 280, 30, 6, health_image)
 
         all_btn_bullets = []
         all_ms_bullets = []
 
         bird1 = Bird(-80)
-        #bird2 = Bird(-70)
 
         all_birds = [bird1]
 
@@ -192,15 +193,12 @@ class Game:
                 self.jump()
 
             if self.check_collision(cactus_arr):
-                # pygame.mixer.music.stop()
-                # pygame.mixer.Sound.play(fall_sound)
+                pygame.mixer.music.stop()
+                pygame.mixer.Sound.play(fall_sound)
                 # if not check_health():
                 game = False
 
             self.show_health()
-
-            #  bird1.draw()
-            #  bird2.draw()
 
             self.draw_birds(all_birds)
             self.check_birds_dmg(all_ms_bullets, all_birds)
@@ -213,7 +211,7 @@ class Game:
         return self.game_over()
 
     def show_menu(self):
-        pygame.mixer.music.load('resources/Sounds/Big_Slinker.mp3')
+        pygame.mixer.music.load('Sounds/Big_Slinker.mp3')
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
@@ -258,8 +256,7 @@ class Game:
             self.cooldown = 0
 
     def game_cycle(self):
-        # Если хотим чтобы музыка играла всю игру -1, если 1 раз, то 1
-        game = True
+        game = True  # Если хотим чтобы музыка играла всю игру -1, если 1 раз, то 1
         cactus_arr = []
         self.create_cactus_arr(cactus_arr)
 
@@ -331,15 +328,12 @@ class Game:
                 self.jump()
 
             if self.check_collision(cactus_arr):
-                # pygame.mixer.music.stop()
-                # pygame.mixer.Sound.play(fall_sound)
+                pygame.mixer.music.stop()
+                pygame.mixer.Sound.play(fall_sound)
                 # if not check_health():
                 game = False
 
             self.show_health()
-
-            # bird1.draw()
-            # bird2.draw()
 
             self.draw_birds(all_birds)
             self.check_birds_dmg(all_ms_bullets, all_birds)
@@ -388,19 +382,19 @@ class Game:
         img = cactus_img[choice]
         width = self.cactus_option[choice * 2]
         height = self.cactus_option[choice * 2 + 1]
-        array.append(Object(display_width + 20, height, width, 7, img))
+        array.append(Object(display_width + 20, height, width, 6, img))
 
         choice = random.randrange(0, 3)
         img = cactus_img[choice]
         width = self.cactus_option[choice * 2]
         height = self.cactus_option[choice * 2 + 1]
-        array.append(Object(display_width + 300, height, width, 7, img))
+        array.append(Object(display_width + 300, height, width, 6, img))
 
         choice = random.randrange(0, 3)
         img = cactus_img[choice]
         width = self.cactus_option[choice * 2]
         height = self.cactus_option[choice * 2 + 1]
-        array.append(Object(display_width + 600, height, width, 7, img))
+        array.append(Object(display_width + 600, height, width, 6, img))
 
     @staticmethod
     def find_radius(array):
@@ -499,7 +493,7 @@ class Game:
         for barrier in barriers:  # проходимся по всем препятствиям, через которые должен перепрыгнуть игрок
             if barrier.y == 449:  # маленький кактус
                 if not self.make_jump:  # если не делаем прыжок
-                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # если выполняется это условие
+                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                         if self.check_health():
                             self.object_return(barriers, barrier)
                         else:
@@ -507,7 +501,7 @@ class Game:
 
                 elif self.jump_counter >= 0:  # если прыжок начинает возрастать. 1 часть параболы
                     if p.usr_y + p.usr_height - 5 >= barrier.y:  # проверяем координаты по у
-                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # проверка правой координаты
+                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                             if self.check_health():
                                 self.object_return(barriers, barrier)
                             else:
@@ -521,7 +515,7 @@ class Game:
                                 return True
             elif barrier.y == 410:  # если не маленький кактус
                 if not self.make_jump:  # если не делаем прыжок
-                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # если выполняется это условие
+                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                         if self.check_health():
                             self.object_return(barriers, barrier)
                         else:
@@ -529,21 +523,21 @@ class Game:
 
                 elif self.jump_counter >= 0:  # если прыжок начинает возрастать. 1 часть параболы
                     if p.usr_y + p.usr_height - 5 >= barrier.y:  # проверяем координаты по у
-                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # проверка правой координаты
+                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                             if self.check_health():
                                 self.object_return(barriers, barrier)
                             else:
                                 return True
                 else:  # если же вторая часть прыжка
                     if p.usr_y + p.usr_height - 10 >= barrier.y:  # проверяем координаты по у
-                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # проверка правой координаты
+                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                             if self.check_health():
                                 self.object_return(barriers, barrier)
                             else:
                                 return True
             elif barrier.y == 420:
                 if not self.make_jump:  # если не делаем прыжок
-                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # если выполняется это условие
+                    if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                         if self.check_health():
                             self.object_return(barriers, barrier)
                         else:
@@ -551,14 +545,14 @@ class Game:
 
                 elif self.jump_counter >= 0:  # если прыжок начинает возрастать. 1 часть параболы
                     if p.usr_y + p.usr_height - 5 >= barrier.y:  # проверяем координаты по у
-                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # проверка правой координаты
+                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                             if self.check_health():
                                 self.object_return(barriers, barrier)
                             else:
                                 return True
                 else:  # если же вторая часть прыжка
                     if p.usr_y + p.usr_height - 10 >= barrier.y:  # проверяем координаты по у
-                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:  # проверка правой координаты
+                        if barrier.x <= p.usr_x + p.usr_width - 22 <= barrier.x + barrier.width:
                             if self.check_health():
                                 self.object_return(barriers, barrier)
                             else:
