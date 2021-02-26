@@ -1,13 +1,13 @@
 from sounds import *
 from effects import *
+from parameters import *
 
 
 class Button:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.inactive_color = (13, 162, 58)
-        self.active_color = (23, 204, 58)
+        self.active_color = (204, 23, 58)
         self.draw_effects = False
         self.clear_effects = False
         self.rect_h = 10
@@ -28,6 +28,8 @@ class Button:
                         quit()
                     else:
                         action()
+                else:
+                    return True
 
         self.draw_beautiful_rect(mouse[0], mouse[1], x, y)
         print_text(message=message, x=x + 10, y=y + 10, font_size=font_size)

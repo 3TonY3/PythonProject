@@ -1,5 +1,4 @@
 from parameters import *
-import random
 
 
 class Object:
@@ -16,7 +15,6 @@ class Object:
             self.x -= self.speed
             return True
         else:
-            self.x = display_width + 50 + random.randrange(-80, 60)
             return False
 
     def return_self(self, radius, y, width, image):
